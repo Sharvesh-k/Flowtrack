@@ -2,11 +2,8 @@ package com.flowtrack.controller;
 
 import com.flowtrack.dto.TimeLogDTO;
 import com.flowtrack.google.GoogleSheetsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import com.flowtrack.google.GoogleSheetsWriter;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +23,16 @@ public class TimeLogController {
 
     @GetMapping("/api/timelogs")
     public List<TimeLogDTO> getTimeLogs() throws Exception {
+
         return googleSheetsService.getTimeLogs();
     }
+
+    @GetMapping("/api/timelogs/pending")
+    public List<TimeLogDTO> getPendingTimeLogs() throws Exception {
+
+        return googleSheetsService.getPendingTimeLogs();
+    }
+
     @PostMapping("/api/timelogs")
     public String addTimeLog(@RequestBody TimeLogDTO dto) throws Exception {
 

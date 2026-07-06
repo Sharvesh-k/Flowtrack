@@ -8,18 +8,78 @@ public class TimeLogDTO {
     private String task;
     private Double hours;
     private String status;
+    private String projectId;
+    private String taskId;
+    private String syncStatus;
+    private String zohoLogId;
+    private String remarks;
 
     public TimeLogDTO() {
     }
 
-    public TimeLogDTO(String employee, String date, String project,
-                      String task, Double hours, String status) {
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getSyncStatus() {
+        return syncStatus;
+    }
+
+    public void setSyncStatus(String syncStatus) {
+        this.syncStatus = syncStatus;
+    }
+
+    public String getZohoLogId() {
+        return zohoLogId;
+    }
+
+    public void setZohoLogId(String zohoLogId) {
+        this.zohoLogId = zohoLogId;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public TimeLogDTO(
+            String employee,
+            String date,
+            String project,
+            String task,
+            Double hours,
+            String status,
+            String projectId,
+            String taskId,
+            String syncStatus,
+            String zohoLogId,
+            String remarks) {
+
         this.employee = employee;
         this.date = date;
         this.project = project;
         this.task = task;
         this.hours = hours;
         this.status = status;
+        this.projectId = projectId;
+        this.taskId = taskId;
+        this.syncStatus = syncStatus;
+        this.zohoLogId = zohoLogId;
+        this.remarks = remarks;
     }
 
     public String getEmployee() {
