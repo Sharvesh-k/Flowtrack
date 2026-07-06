@@ -13,11 +13,6 @@ public class GoogleSheetsService {
 
     private final Sheets sheets;
 
-    // Replace with your Google Sheet ID
-    private static final String SPREADSHEET_ID = "1WOQ1mKinlzP6jS3_kXbiC0zWnpcG4AONkOtKuMMtw9I";
-
-    // Sheet name
-    private static final String RANGE = "Sheet1!A2:F";
 
     public GoogleSheetsService(Sheets sheets) {
         this.sheets = sheets;
@@ -26,7 +21,7 @@ public class GoogleSheetsService {
     public List<TimeLogDTO> getTimeLogs() throws Exception {
 
         ValueRange response = sheets.spreadsheets().values()
-                .get(SPREADSHEET_ID, RANGE)
+                .get(GoogleSheetConstants.SPREADSHEET_ID, GoogleSheetConstants.RANGE)
                 .execute();
 
         List<List<Object>> values = response.getValues();
@@ -51,23 +46,5 @@ public class GoogleSheetsService {
         }
 
         return logs;
-    }public void addTimeLog(TimeLogDTO dto) throws Exception {
-
-        List<Object> row = List.of(
-                dto.getEmployee(),
-                dto.getDate(),
-                dto.getProject(),
-                dto.getTask(),
-                dto.getHours(),
-                dto.getStatus()
-        );
-
-        ValueRange body = new ValueRange()
-                .setValues(List.of(row));
-
-        sheets.spreadsheets().values()
-                .append(SPREADSHEET_ID, "Sheet1!A:F", body)
-                .setValueInputOption("RAW")
-                .execute();
     }
 }
