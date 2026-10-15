@@ -1,1 +1,51 @@
+name: Daily Repository Maintenance
 
+on:
+  schedule:
+   
+    - cron: "0 */3 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure Git
+        run: |
+          git config user.name "Sharvesh-k"
+          git config user.email "ssharveshkj@gmail.com"
+
+      - name: Update Project Heartbeat
+        run: |
+          cat <<EOF > .github/project-heartbeat.md
+          # Project Heartbeat
+
+          This file is automatically updated by GitHub Actions to record scheduled repository maintenance.
+
+          ---
+
+          Last automated maintenance: $(date -u)
+
+          Repository: Flowtrack
+          EOF
+
+      - name: Commit Changes
+        run: |
+          git add .github/project-heartbeat.md
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update repository heartbeat"
+          fi
+
+      - name: Push Changes
+        run: git push
